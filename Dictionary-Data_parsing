@@ -1,0 +1,61 @@
+# IMSI dictionary
+# need to bring in new codes, not adding new ones
+# remove data when not present
+# for common data, set "list" to a time stamp or way that if data is shown 3 times, then alert
+# the data in the dictionary will be that of the used data fot a certain time period. After the mode is switched, the while loop will exit uploading all numbers to the legacy data
+# could create two files. One for all numbers another for ones that trigger the alert mech
+# Need to clear file for testing or when switching on
+# Must make the index usable for GPS and time stamp
+# might need to make an exclude list
+
+# TESTING:
+#   create dummy CSV file for testing to then parse through. Create the dic based on Date/Time then the number. Could also harvest the GPS data to later upload on a map
+
+x = 0
+# initialize dictonarys for both all IMSI and onse that hit the warning mech
+D = {}
+WARNING = {}
+W_index = 0  # warned IMSI index for WARNING dic
+list = 0  # All IMSI index dor D dic
+
+
+while x < 1:
+
+    y = str(input("random number: "))  # gather the imsi
+    x = int(input("enter x: "))  # checker to constantly input data
+
+    D[list] = y
+    list = list + 1
+
+    for i in range(len(D)):
+        #print(D[i])
+        occured = 0
+        for j in range(len(D)):
+            if D[i] == D[j]:
+                occured = occured + 1
+                if occured > 2:
+                    print('Warning! Common IMSI: ', D[i])
+                    WARNING[W_index] = D[i]
+                    W_index = W_index + 1
+                    D[i] = ''  # delete an idex to not print all of the found issues to the file
+
+else:
+    print('Done')
+
+    # upload all numbers for legacy data
+    file_write = open('IMSI_numbers.txt', 'a')
+    file_read = open('IMSI_numbers.txt', 'r')
+
+    # upload numbers in different file that hit the warning. Only shown once
+    w_file = open('w_file.txt', 'a')
+
+    for IMSI in D: # write all IMSI
+        file_write.write(D[IMSI])
+        file_write.write('\n')
+    for warned_IMSI in WARNING: # Write only the warning IMSI
+        w_file.write(WARNING[warned_IMSI])
+        w_file.write('\n')
+
+    print('Data uploaded to legacy')
+
+    # need to find a way to clear the enitre dictonary afterward to adress issues. Could clear by self when initionalizing

@@ -1,0 +1,46 @@
+# power haxels from the PI
+
+import RPi.GPIO as GPIO  # library
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+
+
+# assign pins to the motors
+# word left down then top right down motor15 and so on
+motor1 = 3
+motor2 = 5
+motor3 = 7
+motor4 = 11
+motor5 = 13
+motor6 = 15
+motor7 = 19
+motor8 = 21
+motor9 = 23
+motor10 = 29
+motor11 = 31
+motor12 = 33
+motor13 = 35
+motor14 = 37
+motor15 = 8
+
+
+# set pins to out
+GPIO.setup(motor1, GPIO.OUT)
+GPIO.setup(motor2, GPIO.OUT)
+GPIO.setup(motor3, GPIO.OUT)
+GPIO.setup(motor4, GPIO.OUT)
+GPIO.setup(motor5, GPIO.OUT)
+GPIO.setup(motor6, GPIO.OUT)
+GPIO.setup(motor7, GPIO.OUT)
+GPIO.setup(motor8, GPIO.OUT)
+GPIO.setup(motor9, GPIO.OUT)
+GPIO.setup(motor10, GPIO.OUT)
+GPIO.setup(motor11, GPIO.OUT)
+GPIO.setup(motor12, GPIO.OUT)
+GPIO.setup(motor13, GPIO.OUT)
+GPIO.setup(motor14, GPIO.OUT)
+GPIO.setup(motor15, GPIO.OUT)
+
+
+GPIO.output(motor1, GPIO.HIGH) # on
+GPIO.output(motor1, GPIO.LOW)  # off
